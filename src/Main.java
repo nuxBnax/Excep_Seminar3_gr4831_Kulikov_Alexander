@@ -7,11 +7,17 @@ public class Main {
         try {
             writer(validation(inputData()));
         } catch (NullPointerException | UserArraySizeException | IncorrectFormatException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    /**
+     * Чтение данных пользователя из консоли
+     * @return массив с данными пользователя
+     * @throws NullPointerException Пользователь не ввел данные
+     * @throws UserArraySizeException Количество элементов, указанных через пробел, больше или меньше требуемых
+     */
     static String[] inputData() throws NullPointerException, UserArraySizeException {
         Scanner cs = new Scanner(System.in);
 
@@ -30,6 +36,12 @@ public class Main {
 
         return userData;
     }
+    /**
+     * Чтение данных пользователя из консоли
+     * @param userData массив с данными пользователя
+     * @return объект пользователя
+     * @throws IncorrectFormatException указанные данные не соответствуют требуемому формату
+     */
     static User validation(String[] userData) throws IncorrectFormatException {
         if (isNumeric(userData[0]) || isNumeric(userData[1]) || isNumeric(userData[2])) {
             throw new IncorrectFormatException("Неверный формат Фамилии/Имени/Отчества, он должен состоять из букв, а вы ввели цифры");
@@ -72,6 +84,10 @@ public class Main {
 
         return user;
     }
+    /**
+     * Запись данных пользователя в файл
+     * @param user объект пользователя
+     */
     static void writer(User user) {
 
         String fileName = user.getSurName() + ".txt";
@@ -85,6 +101,11 @@ public class Main {
             e.printStackTrace();
         }
     }
+    /**
+     * Проверка на принадлежность к числам
+     * @param str строка
+     * @return true или false
+     */
     static boolean isNumeric(String str) {
         try {
             Integer.valueOf(str);
